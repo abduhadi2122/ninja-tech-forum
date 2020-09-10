@@ -64,12 +64,6 @@ def topic_details(topic_id):
     # get comments for this topic
     comments = db.query(Comment).filter_by(topic=topic).all()
 
-    # START test background tasks (TODO: delete this code later)
-    if os.getenv('REDIS_URL'):
-        from tasks import get_random_num
-        get_random_num()
-    # END test background tasks
-
 
 
     return render_template("topic/topic_details.html", topic=topic, user=user,

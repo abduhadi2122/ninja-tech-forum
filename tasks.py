@@ -6,20 +6,9 @@ import requests, json
 # worker
 huey = RedisHuey(url=os.getenv('REDIS_URL'))
 
-#task
-@huey.task(retries=5, retry_delay=5)
-def get_random_num():
-    print("This is a task to get a random number")
-    num = random.randint(1, 3)
-    print("Random number is {}".format(num))
-
-    if num == 1:
-        return True
-    else:
-        raise Exception("Error in the worker... :(")
 
 
-@huey.task(retries=5, retry_delay=5)
+@huey.task(retries=10, retry_delay=600)
 def send_email_task(receiver_email, subject, text):
     sender_email = os.getenv("MY_SENDER_EMAIL")  # Your website's official email address
     api_key = os.getenv('SENDGRID_API_KEY')
