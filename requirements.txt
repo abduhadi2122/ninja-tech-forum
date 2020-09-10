@@ -5,3 +5,4 @@ psycopg2
 smartninja-redis
 pytest
 requests
+huey
